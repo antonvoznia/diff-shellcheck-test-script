@@ -1,0 +1,45 @@
+diff --git a/.github/workflows/differential-shellcheck.yml b/.github/workflows/differential-shellcheck.yml
+new file mode 100644
+index 00000000..3cf5e85c
+--- /dev/null
++++ b/.github/workflows/differential-shellcheck.yml
+@@ -0,0 +1,23 @@
++---
++
++name: Differential ShellCheck
++on: [pull_request]
++
++permissions:
++  contents: read
++
++jobs:
++  lint:
++    runs-on: ubuntu-latest
++
++    steps:
++      - name: Repository checkout
++        uses: actions/checkout@1f9a0c22da41e6ebfa534300ef656657ea2c6707
++        with:
++          fetch-depth: 0
++
++      - name: Differential ShellCheck
++        uses: redhat-plumbers-in-action/differential-shellcheck@574cfd79f7317593a0a361cf50fec62d744b3c8e
++        with:
++          severity: error
++          token: ${{ secrets.GITHUB_TOKEN }}
+diff --git a/usr/share/rear/.shellcheckrc b/usr/share/rear/.shellcheckrc
+new file mode 100644
+index 00000000..471c50f2
+--- /dev/null
++++ b/usr/share/rear/.shellcheckrc
+@@ -0,0 +1,2 @@
++disable=SC2168
++shell=bash
+diff --git a/usr/share/rear/lib/.shellcheckrc b/usr/share/rear/lib/.shellcheckrc
+new file mode 100644
+index 00000000..3add7b3b
+--- /dev/null
++++ b/usr/share/rear/lib/.shellcheckrc
+@@ -0,0 +1,2 @@
++enable=SC2168
++shell=bash
